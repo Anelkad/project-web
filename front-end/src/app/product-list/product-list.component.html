@@ -1,0 +1,29 @@
+<div *ngIf="(product.ok)&&(product.class==category.id)">
+  <h3><button (click)="Remove(product)">-</button>{{product.id}}
+    <a [title]="product.name + ' details'"
+[routerLink]="['/products', product.id]">
+{{ product.name }}
+</a></h3>
+<img *ngFor="let image of product.image" src="{{image}}">
+<p *ngIf="product.description">
+Description: {{ product.description }}
+</p>
+<p *ngIf="product.rating">
+    Rating: {{ product.rating }}
+
+<button class="like" (click)="LikeOn(product)">Like!</button> {{product.like}}</p>
+<button onclick="document.location='https://t.me/bkvll'">
+Share
+</button>
+
+<app-product-alerts
+  [product]="product" 
+  (notify)="onNotify()">
+</app-product-alerts>
+
+</div>
+<!-- 
+Copyright Google LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at https://angular.io/license
+-->

@@ -1,0 +1,11 @@
+<h2>Product Details</h2>
+
+<div *ngIf="product">
+  <img *ngFor="let image of product.image" src="{{image}}">
+  <h3>{{ product.name }} <button (click)="addToCart(product)">Buy</button></h3>
+  <h4>Price: {{ product.price }} тенге</h4>Rating: {{ product.rating }}
+  <button class="like" (click)="LikeOn(product)">Like!</button> {{product.like}}
+  <p>{{ product.description }}</p>
+  <a href="{{product.url}}">Link from amazon</a>
+  
+</div>
