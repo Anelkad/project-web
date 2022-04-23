@@ -3,6 +3,8 @@ from .models import Category, Product, Addition, Promotion
 from django.http.response import JsonResponse
 from api.serializers import CategorySerializer, ProductSerializer, AdditionSerializer, PromotionSerializer
 
+from rest_framework.permissions import IsAuthenticated
+
 #fbv
 from rest_framework.decorators import api_view
 from rest_framework.request import Request
@@ -35,11 +37,13 @@ def products_list(request):
     pass
 
 class ProductListView(APIView):
-
+    
     def get(self, request):
         products = Product.objects.all()
         serializer = ProductSerializer(products, many = True)
         return Response(serializer.data)
+
+    #permission_classes = [IsAuthenticated]
 
     def post(self, request):
         serializer = ProductSerializer(data=request.data)
@@ -52,6 +56,9 @@ def product_detail(request, product_id):
     pass
 
 class ProductDetailView(APIView):
+    
+    #permission_classes = [IsAuthenticated]
+
     def get_object(self, pk):
         try:
             return Product.objects.get(id=pk)
