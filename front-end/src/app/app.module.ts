@@ -25,6 +25,7 @@ import { CategoryListComponent } from './category-list/category-list.component';
       { path: 'categories', component: CategoryListComponent },
     ])
   ],
+  
   declarations: [
     AppComponent,
     TopBarComponent,
