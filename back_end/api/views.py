@@ -33,27 +33,22 @@ def categories_products(request, category_id):
         serializer = ProductSerializer(products, many = True)
         return JsonResponse(serializer.data, safe=False)
 
-def products_list(request):
-    pass
 
 class ProductListView(APIView):
-    
-    def get(self, request):
+     #permission_classes = [IsAuthenticated]
+
+    def get(self, request, category_id = None):
         products = Product.objects.all()
         serializer = ProductSerializer(products, many = True)
         return Response(serializer.data)
 
-    #permission_classes = [IsAuthenticated]
-
-    def post(self, request):
+    def post(self, request, category_id = None):
         serializer = ProductSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors)
 
-def product_detail(request, product_id):
-    pass
 
 class ProductDetailView(APIView):
     
@@ -65,12 +60,12 @@ class ProductDetailView(APIView):
         except Product.DoesNotExist as e:
             raise Http404
 
-    def get(self, request, pk=None):
+    def get(self, request, pk, category_id = None):
         product = self.get_object(pk)
         serializer = ProductSerializer(product)
         return Response(serializer.data)
 
-    def put(self, request, pk=None):
+    def put(self, request, pk, category_id = None):
         product = self.get_object(pk)
         serializer = ProductSerializer(instance=product, data=request.data)
         if serializer.is_valid():
@@ -78,16 +73,16 @@ class ProductDetailView(APIView):
             return Response(serializer.data)
         return Response(serializer.errors)
 
-    def delete(self, request, pk=None):
+    def delete(self, request, pk, category_id = None):
         product = self.get_object(pk)
         product.delete()
         return Response({'message': 'deleted'}, status=204)
 
 
-def product_addition(request, product_id):
+def product_addition(request, product_id, category_id=None):
     try:
-        additions = Addition.objects.get(id=product_id).addition_set.all()
-        serializer = AdditionSerializer(addition, many = True)
+        addition = Addition.objects.get(product=product_id)
+        serializer = AdditionSerializer(addition)
     except Addition.DoesNotExist as e:
         return JsonResponse({'message': str(e)}, status=400)
 

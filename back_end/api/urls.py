@@ -1,4 +1,4 @@
-from .views import categories_list, categories_products, products_list, product_detail, product_addition, promotions, ProductDetailView, ProductListView
+from .views import categories_list, categories_products, product_addition, promotions, ProductDetailView, ProductListView
 from django.urls import path
 from rest_framework_jwt.views import obtain_jwt_token
 
