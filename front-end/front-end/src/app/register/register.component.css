@@ -1,0 +1,38 @@
+.register {
+    width: 45%;
+    margin: 40px auto;
+    height: 600px;
+    background-color: rgba(255, 255, 255, 0.2);
+    display: flex;
+    flex-direction: column;
+}
+
+.avatar {
+    width: 150px;
+    margin: 0 auto;
+}
+
+.inputs {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+.inputs>input {
+    margin-bottom: 5px;
+    height: 30px;
+    width: 250px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+.buttons>button {
+    width: 170px;
+    height: 25px;
+    margin-bottom: 3px;
+}
+

@@ -1,0 +1,22 @@
+<nav>
+  <div class="left-nav">
+    <a routerLink="/home" title="home"><img src="assets/images/home.png"></a>
+    <a routerLink="/about" title="about"><img src="assets/images/about.png" style="margin-top: 4px"></a>
+  </div>
+
+  <div id="logo" *ngIf="!get_homePressed()">
+    <img src="assets\images\B_logo.png" alt="logo">
+    <h1>game store</h1>
+  </div>
+
+  <div class="right-nav">
+    <a routerLink="/cart" title="shopping-cart"><img src="assets/images/shopping-cart.png " style="margin-top: 2px"></a>
+    <a routerLink="/register" title="login"><img src="assets/images/user.png"></a>
+  </div>
+</nav>
+<div >
+
+</div>
+<router-outlet></router-outlet>
+
+  

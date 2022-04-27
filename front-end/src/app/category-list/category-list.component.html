@@ -1,6 +1,0 @@
-<div  *ngFor="let category of categories">
-<input type="checkbox" (change)="Show(category)">
-<span class="category">{{ category.id }}: {{ category.name }}</span>
-<div *ngIf="category.ok"><app-product-list *ngFor="let product of products" [product]="product" [category]="category">
-</app-product-list></div>
-</div>
