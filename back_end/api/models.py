@@ -76,19 +76,18 @@ class Addition(models.Model):
     def __str__(self):
         return self.name
 
-class Promotion(models.Model):
-    name = CharField(max_length=255)
+class About(models.Model):
     description = TextField()
-    detail = TextField()
-
-    class Meta:
-        verbose_name_plural = 'Promotions'
+    contacts = CharField(max_length=11)
+    email = CharField(max_length=50)
 
     def to_json(self):
         return {
             'id': self.pk,
-            'name': self.name
+            'description': self.description,
+            'contacts': self.contacts,
+            'email': self.email
         }
 
     def __str__(self):
-        return self.name
+        return self.contacts

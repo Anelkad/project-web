@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from api.models import Product, Category, Addition, Promotion
+from api.models import Product, Category, Addition
 
 #serializers.ModelSerializer
 class ProductSerializer(serializers.ModelSerializer):
@@ -21,8 +21,3 @@ class CategorySerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     name = serializers.CharField()
 
-class PromotionSerializer(serializers.Serializer):
-    id = serializers.IntegerField(read_only=True)
-    name = serializers.CharField()
-    description = serializers.CharField()
-    detail = serializers.CharField()

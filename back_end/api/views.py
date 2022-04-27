@@ -1,7 +1,7 @@
 import json
-from .models import Category, Product, Addition, Promotion
+from .models import Category, Product, Addition
 from django.http.response import JsonResponse
-from api.serializers import CategorySerializer, ProductSerializer, AdditionSerializer, PromotionSerializer
+from api.serializers import CategorySerializer, ProductSerializer, AdditionSerializer
 
 from rest_framework.permissions import IsAuthenticated
 
@@ -88,7 +88,3 @@ def product_addition(request, product_id, category_id=None):
 
     return JsonResponse(serializer.data, safe=False)
 
-def promotions(request):
-    promotions = Promotion.objects.all()
-    serializer = PromotionSerializer(promotions, many = True)
-    return JsonResponse(serializer.data, safe=False)
