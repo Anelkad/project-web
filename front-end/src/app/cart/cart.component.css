@@ -1,0 +1,12 @@
+.cart-list {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1em;
+}
+
+.left-cart {
+    display: flex;
+    flex-direction: column;
+}
+.order {
+    text-align: right;
+}

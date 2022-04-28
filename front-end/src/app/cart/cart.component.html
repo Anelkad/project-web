@@ -1,0 +1,29 @@
+<div class="product-detail">
+    <div class="product-detail-header" style="width: 71%;">
+        <p style="letter-spacing: 3px;">cart</p>
+    </div>
+    <div class="product-detail-main" style="padding-left: 40px; width: 70%;">
+        <div class="left-cart">
+            <div class="cart-list">
+                <ol>
+                    <li *ngFor="let entry of items.entries()" style="padding-top: 20px">
+                        <p>{{entry[0].name}} X {{entry[1]}}</p>
+                        <p>price: {{entry[0].price}} KZT <button (click)="delete(entry[0])">delete</button></p> 
+                    </li>
+                </ol>
+            </div>
+            <div>
+                <p style="font-family: Verdana, Geneva, Tahoma, sans-serif; padding-top: 20px">Total: {{total}}  KZT</p>
+            </div>
+            <div>
+                <button style="height: 30px; width: 70px; margin-top: 10px; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 15px;" (click)="clear()">clear all</button>
+            </div>
+        </div>
+        
+        <div class="order">
+            <input type="text" [(ngModel)]="address" placeholder="type your address">
+            <button (click)="order()">order</button>
+        </div>
+    </div>
+
+</div>
