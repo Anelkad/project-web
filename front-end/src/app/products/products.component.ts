@@ -13,12 +13,13 @@ export class ProductsComponent implements OnInit {
   category_id!: number;
   products!: Product[];
 
+
   find!: string;
 
   constructor(private route: ActivatedRoute, private productService: ProductsService) {
     this.put_homePressed(false);
    }
-  
+
   ngOnInit(): void {
     const routeParams = this.route.snapshot.paramMap;
     this.category_id = +routeParams.get('categoryID')!;
@@ -37,7 +38,7 @@ export class ProductsComponent implements OnInit {
   getCategory_name(id: number) {
     return this.productService.getCategory_name(id);
   }
-  
+
   put_homePressed(homePressed: boolean) {
     this.productService.put_homePressed(homePressed);
   }
