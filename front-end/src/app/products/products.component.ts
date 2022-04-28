@@ -18,7 +18,7 @@ export class ProductsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private productService: ProductsService) {
     this.put_homePressed(false);
    }
-
+  
   ngOnInit(): void {
     const routeParams = this.route.snapshot.paramMap;
     this.category_id = +routeParams.get('categoryID')!;
@@ -28,7 +28,7 @@ export class ProductsComponent implements OnInit {
   }
 
   Find() {
-    this.products =this.products.filter(k => k.name.toLowerCase().includes(this.find.toLowerCase()));
+    this.products =this.products.filter(k => k.name.toLowerCase().startsWith(this.find.toLowerCase()));
     if(this.find == '' ) {
       this.getProducts_byCategory(this.category_id);
     }
@@ -37,7 +37,7 @@ export class ProductsComponent implements OnInit {
   getCategory_name(id: number) {
     return this.productService.getCategory_name(id);
   }
-
+  
   put_homePressed(homePressed: boolean) {
     this.productService.put_homePressed(homePressed);
   }
