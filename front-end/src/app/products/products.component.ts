@@ -24,7 +24,7 @@ export class ProductsComponent implements OnInit {
     this.category_id = +routeParams.get('categoryID')!;
     this.getProducts_byCategory(this.category_id);
     this.category_name = this.getCategory_name(this.category_id);
-    // this.productService.getProducts_byCategory();
+
   }
 
   Find() {
@@ -43,7 +43,9 @@ export class ProductsComponent implements OnInit {
   }
 
   getProducts_byCategory(id: number) {
-    this.products = this.productService.getProducts_byCategory(id);
+    this.productService.getProducts_byCategory(id).subscribe((data)=>{
+      this.products = data;
+    })
   }
 
   // getProducts_byCategory(id: number) {

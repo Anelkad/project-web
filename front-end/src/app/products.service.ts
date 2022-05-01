@@ -1,32 +1,20 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { additions } from './additions';
 import { categories } from './categories';
-import { products } from './products';
-import {AuthToken} from './models'
-import {Observable} from 'rxjs';
-
+import { Product, AuthToken} from './products';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
-
-  BASE_URL = 'http://localhost:8000';
-
-  constructor(private http: HttpClient, private router: Router) {
-  }
-
-  login(username:any,password:any): Observable<AuthToken>{
-    return this.http.post<AuthToken>(`${this.BASE_URL}/api/login/`,{
-      username,
-      password
-    });
-  }
-
   homePressed!: boolean;
 
+  BASE_URL='http://127.0.0.1:8000';
+  constructor(private router: Router, private http: HttpClient) {}
 
   put_homePressed(homePressed: boolean) {
     this.homePressed = homePressed;
@@ -36,12 +24,19 @@ export class ProductsService {
     return this.homePressed;
   }
 
-  getProduct(id: number) {
-    return products.find((x) => x.id === id);
+  login(username:any,password:any): Observable<AuthToken>{
+    return this.http.post<AuthToken>(`${this.BASE_URL}/api/login/`,{
+      username,
+      password
+    });
   }
 
-  getProducts_byCategory(id: number) {
-    return products.filter((x => x.class == id));
+  getProduct(id: number):Observable<Product>{
+    return this.http.get<Product>(`${this.BASE_URL}/api/products/${id}/`);
+  }
+
+  getProducts_byCategory(id: number):Observable<Product[]>{
+    return this.http.get<Product[]>(`${this.BASE_URL}/api/categories/${id}/products/`);
   }
 
   getCategory_name(id: number) {

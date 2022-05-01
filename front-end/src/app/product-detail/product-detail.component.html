@@ -19,11 +19,11 @@
                     <img src="assets\images\clock.png" alt="clock">
                     <p>30-60 minutes</p>
                 </div>
-            </div> 
+            </div>
 
             <div class="gallery">
                 <div class="main-photo">
-                    <img [src]="product.image[image_num]">
+                    <img [src]="image[image_num]">
                 </div>
                 <div style="display: flex; margin-top: 10px; justify-content: center;">
                     <img class="nextImage" style="margin-right: 20px" (click)="left_move(image_num)" src="assets\images\left-arrow.png">
@@ -55,11 +55,11 @@
                         <p>{{product.like_count}}</p>
                     </div>
                 </div>
-                
+
                 <p class="description-text">{{product.description}}</p>
             </div> <!-- text and buttons -->
         </div>
-        
+
         <div class="addition" *ngIf="checkAddition(product.id)">
             <h2>Addition</h2>
             <a [routerLink]="['/products', product.id, 'addition']">{{addition_name}}</a>

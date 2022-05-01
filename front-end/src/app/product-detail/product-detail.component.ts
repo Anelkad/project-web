@@ -10,10 +10,12 @@ import { ProductsService } from '../products.service';
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.css']
 })
+
 export class ProductDetailComponent implements OnInit {
   product!: Product;
   category_name!: string;
   image_num: number = 0;
+  image: string[] = [];
   dots: string[] = ['dot active', 'dot', 'dot'];
   addition_name!: string;
 
@@ -21,11 +23,16 @@ export class ProductDetailComponent implements OnInit {
 
   ngOnInit(): void {
     const routeParams = this.route.snapshot.paramMap;
-    this.product = this.getProduct(+routeParams.get('id')!)!;
+    const productIdFromRoute = Number(routeParams.get('id'));
+    this.getProduct(productIdFromRoute).subscribe((data)=>{
+      console.log(data);
+      this.product = data;
+      this.image = [this.product.img1, this.product.img2, this.product.img3];
+    })
+
     const category_id = +routeParams.get('categoryID')!;
     this.getCategory_name(category_id);
   }
-// Check Addition
 
   checkAddition(id: number) {
     let x = this.productService.getAddition(this.product.id)!.name;
@@ -36,13 +43,13 @@ export class ProductDetailComponent implements OnInit {
     else {
       return false;
     }
-   
+
   }
 
   getCategory_name(id: number) {
     this.category_name = this.productService.getCategory_name(id);
   }
-  
+
   getProduct(id: number) {
     return this.productService.getProduct(id);
   }
