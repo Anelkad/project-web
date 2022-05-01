@@ -35,7 +35,7 @@ def categories_products(request, category_id):
 
 
 class ProductListView(APIView):
-     #permission_classes = [IsAuthenticated]
+     # permission_classes = [IsAuthenticated]
 
     def get(self, request, category_id = None):
         products = Product.objects.all()
@@ -52,7 +52,7 @@ class ProductListView(APIView):
 
 class ProductDetailView(APIView):
     
-    #permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def get_object(self, pk):
         try:

@@ -1,14 +1,32 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { additions } from './additions';
 import { categories } from './categories';
 import { products } from './products';
+import {AuthToken} from './models'
+import {Observable} from 'rxjs';
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
+
+  BASE_URL = 'http://localhost:8000';
+
+  constructor(private http: HttpClient, private router: Router) {
+  }
+
+  login(username:any,password:any): Observable<AuthToken>{
+    return this.http.post<AuthToken>(`${this.BASE_URL}/api/login/`,{
+      username,
+      password
+    });
+  }
+
   homePressed!: boolean;
-  constructor(private router: Router) {}
+
 
   put_homePressed(homePressed: boolean) {
     this.homePressed = homePressed;
@@ -21,7 +39,7 @@ export class ProductsService {
   getProduct(id: number) {
     return products.find((x) => x.id === id);
   }
-  
+
   getProducts_byCategory(id: number) {
     return products.filter((x => x.class == id));
   }
