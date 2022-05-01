@@ -11,15 +11,16 @@ export const categories = [
         image: 'assets/images/role-playing.png'
     },
     {
-        id: 2,
+      id: 2,
+      title: 'euro',
+      image: 'assets/images/euro.png'
+    },
+  {
+        id: 3,
         title: 'collaboration',
         image: 'assets/images/collaboration.png'
     },
-    {
-        id: 3,
-        title: 'euro',
-        image: 'assets/images/euro.png'
-    },
+
     {
         id: 4,
         title: 'territory control',

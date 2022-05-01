@@ -13,7 +13,6 @@ export class ProductsComponent implements OnInit {
   category_id!: number;
   products!: Product[];
 
-
   find!: string;
 
   constructor(private route: ActivatedRoute, private productService: ProductsService) {
@@ -25,11 +24,11 @@ export class ProductsComponent implements OnInit {
     this.category_id = +routeParams.get('categoryID')!;
     this.getProducts_byCategory(this.category_id);
     this.category_name = this.getCategory_name(this.category_id);
-    // this.productService.getProducts_byCategory();
+
   }
 
   Find() {
-    this.products =this.products.filter(k => k.name.toLowerCase().startsWith(this.find.toLowerCase()));
+    this.products =this.products.filter(k => k.name.toLowerCase().includes(this.find.toLowerCase()));
     if(this.find == '' ) {
       this.getProducts_byCategory(this.category_id);
     }
@@ -44,7 +43,9 @@ export class ProductsComponent implements OnInit {
   }
 
   getProducts_byCategory(id: number) {
-    this.products = this.productService.getProducts_byCategory(id);
+    this.productService.getProducts_byCategory(id).subscribe((data)=>{
+      this.products = data;
+    })
   }
 
   // getProducts_byCategory(id: number) {
