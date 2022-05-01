@@ -1,7 +1,7 @@
 import json
-from .models import Category, Product, Addition
+from .models import Category, Product, Addition, About, Order
 from django.http.response import JsonResponse
-from api.serializers import CategorySerializer, ProductSerializer, AdditionSerializer
+from api.serializers import CategorySerializer, ProductSerializer, AdditionSerializer, OrderSerializers
 
 from rest_framework.permissions import IsAuthenticated
 
@@ -32,6 +32,7 @@ def categories_products(request, category_id):
     if request.method == 'GET':
         serializer = ProductSerializer(products, many = True)
         return JsonResponse(serializer.data, safe=False)
+
 
 
 class ProductListView(APIView):
@@ -87,4 +88,20 @@ def product_addition(request, product_id, category_id=None):
         return JsonResponse({'message': str(e)}, status=400)
 
     return JsonResponse(serializer.data, safe=False)
+
+
+@api_view(['POST', 'GET'])
+def create_order(request):
+    if request.method == 'POST':
+        # permission_classes = (IsAuthenticated,)
+        serializer = OrderSerializers(data=request.data)
+        print(request.data['product'])
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors)
+    elif request.method == 'GET':
+        orders = Order.objects.all()
+        serializer = OrderSerializers(orders, many = True)
+        return Response(serializer.data)
 

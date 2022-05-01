@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from api.models import Product, Category, Addition
+from api.models import Product, Category, Addition, Order
 
 #serializers.ModelSerializer
 class ProductSerializer(serializers.ModelSerializer):
@@ -21,3 +21,7 @@ class CategorySerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     name = serializers.CharField()
 
+class OrderSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Order
+        fields =  ('id', 'name', 'address','contacts', 'product')

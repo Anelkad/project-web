@@ -91,3 +91,18 @@ class About(models.Model):
 
     def __str__(self):
         return self.contacts
+
+class Order(models.Model):
+    name = TextField()
+    contacts = TextField()
+    address = TextField()
+    product = TextField()
+
+    def to_json(self):
+        return {
+            'id': self.pk,
+            'name': self.name,
+            'contacts': self.contacts,
+            'address': self.address,
+            'product':self.product,
+        }
