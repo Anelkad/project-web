@@ -3,7 +3,7 @@
     </div> -->
 
     <div class="products-header">
-        <p *ngIf="category_name">{{category_name}}</p>
+        <p *ngIf="category">{{category.title}}</p>
         <div class="find">
             <input type="text" [(ngModel)]="find">
             <button (click)="Find()">Find</button>

@@ -6,13 +6,12 @@ import { CartComponent } from './cart/cart.component';
 import { HomeComponent } from './home/home.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ProductsComponent } from './products/products.component';
-import { RegisterComponent } from './register/register.component';
+
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'cart', component: CartComponent},
   { path: 'about', component: AboutComponent},
-  { path: 'register', component: RegisterComponent},
   { path: 'categories/:categoryID/products', component: ProductsComponent},
   { path: 'categories/:categoryID/products/:id', component: ProductDetailComponent},
   { path: 'products/:id/addition', component: AdditionComponent},

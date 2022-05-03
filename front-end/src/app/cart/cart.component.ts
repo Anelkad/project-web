@@ -10,8 +10,11 @@ import { ProductsService } from '../products.service';
 })
 export class CartComponent implements OnInit {
     items = this.cartService.getCart();
+    product = this.cartService.getProducts()
     total: number = 0;
     address!: string;
+    phone_number!: string;
+    name!: string;
 
   constructor(private productService: ProductsService, private cartService: CartService) {
     this.put_homePressed(false);
@@ -38,10 +41,17 @@ export class CartComponent implements OnInit {
     this.cartService.clear();
     this.get_Total();
   }
-  
+
   order() {
-    window.alert("will be delivered " + this.address);
-    this.address="";
+    window.alert("will be delivered to" + " " + this.address);
+    this.cartService.createOrder(this.product, this.name, this.address, this.phone_number).subscribe(data =>{
+    console.log(data)})
+
+    this.name = '';
+    this.address = '';
+    this.phone_number = '';
+    this.clear();
+    }
+
   }
 
-}

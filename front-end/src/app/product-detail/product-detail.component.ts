@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { findIndex } from 'rxjs';
 import { CartService } from '../cart.service';
 import { Product } from '../products';
+import { Addition } from "../additions";
 import { ProductsService } from '../products.service';
+import { Category } from "../categories";
 
 @Component({
   selector: 'app-product-detail',
@@ -13,45 +14,44 @@ import { ProductsService } from '../products.service';
 
 export class ProductDetailComponent implements OnInit {
   product!: Product;
-  category_name!: string;
+  category!: Category;
   image_num: number = 0;
   image: string[] = [];
   dots: string[] = ['dot active', 'dot', 'dot'];
-  addition_name!: string;
+  addition!: Addition;
 
   constructor(private route: ActivatedRoute, private productService: ProductsService, private cartService: CartService) { }
 
   ngOnInit(): void {
     const routeParams = this.route.snapshot.paramMap;
     const productIdFromRoute = Number(routeParams.get('id'));
-    this.getProduct(productIdFromRoute).subscribe((data)=>{
-      console.log(data);
+    this.productService.getProduct(productIdFromRoute).subscribe((data)=>{
       this.product = data;
       this.image = [this.product.img1, this.product.img2, this.product.img3];
+      })
+
+    this.productService.getAddition(productIdFromRoute).subscribe((data)=>{
+      this.addition= data;
     })
 
     const category_id = +routeParams.get('categoryID')!;
-    this.getCategory_name(category_id);
+    this.getCategory(category_id);
   }
 
-  checkAddition(id: number) {
-    let x = this.productService.getAddition(this.product.id)!.name;
-    if (x!== null ) {
-      this.addition_name = x;
-      return true;
-    }
-    else {
-      return false;
-    }
-
+  add_likes() {
+    const routeParams = this.route.snapshot.paramMap;
+    const productIdFromRoute = Number(routeParams.get('id'));
+    this.productService.getProductLike(productIdFromRoute).subscribe((data)=>{
+      this.product = data;
+      this.image = [this.product.img1, this.product.img2, this.product.img3];
+      })
   }
 
-  getCategory_name(id: number) {
-    this.category_name = this.productService.getCategory_name(id);
-  }
 
-  getProduct(id: number) {
-    return this.productService.getProduct(id);
+  getCategory(id: number) {
+    this.productService.getCategory(id).subscribe((data)=>{
+      this.category= data;
+    });
   }
 
   add_toCart(product: Product) {
@@ -92,7 +92,4 @@ export class ProductDetailComponent implements OnInit {
     this.dots[index] = 'dot active';
   }
 
-  add_likes() {
-    this.product.like_count++;
-  }
 }

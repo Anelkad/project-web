@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Addition } from '../additions';
 import { CartService } from '../cart.service';
-import { Product } from '../products';
 import { ProductsService } from '../products.service';
 
 @Component({
@@ -11,31 +10,39 @@ import { ProductsService } from '../products.service';
   styleUrls: ['./addition.component.css']
 })
 export class AdditionComponent implements OnInit {
-  declare addition: Addition;
+  addition!: Addition;
   image_num: number = 0;
+  image: string[] = [];
   dots: string[] = ['dot active', 'dot', 'dot'];
 
- 
+
   constructor(private route: ActivatedRoute, private productService: ProductsService, private cartService: CartService) {
     this.put_homePressed(false);
   }
-  put_homePressed(hompressed: boolean) {
-    this.productService.put_homePressed(hompressed);
+
+  put_homePressed(homepressed: boolean) {
+    this.productService.put_homePressed(homepressed);
   }
 
   ngOnInit(): void {
     const routeParams = this.route.snapshot.paramMap;
-    this.addition = this.getAddition(+routeParams.get('id')!)!;
+    this.getAddition(+routeParams.get('id')!).subscribe((data)=>{
+      this.addition= data;
+      this.image = [this.addition.img1, this.addition.img2 ,this.addition.img3]
+    })
   }
 
   getAddition(id: number) {
     return this.productService.getAddition(id);
   }
 
-  
-  // add_toCart(product: Product) {
-  //   this.cartService.add_toCart(product);
-  // }
+  add_likes() {
+    const routeParams = this.route.snapshot.paramMap;
+    this.productService.getAdditionLike(+routeParams.get('id')!).subscribe((data)=>{
+      this.addition= data;
+      this.image = [this.addition.img1, this.addition.img2 ,this.addition.img3]
+    })
+  }
 
   share() {
     this.productService.share();
@@ -71,7 +78,4 @@ export class AdditionComponent implements OnInit {
     this.dots[index] = 'dot active';
   }
 
-  add_likes() {
-    this.addition.like_count++;
-  }
 }

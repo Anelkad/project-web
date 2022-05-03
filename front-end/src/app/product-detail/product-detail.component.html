@@ -1,6 +1,6 @@
 <div class="product-detail">
     <div class="product-detail-header">
-        <p>{{category_name}}</p>
+        <p>{{category.title}}</p>
     </div>
     <div class="product-detail-main">
         <div class="description">
@@ -60,9 +60,9 @@
             </div> <!-- text and buttons -->
         </div>
 
-        <div class="addition" *ngIf="checkAddition(product.id)">
+        <div class="addition" *ngIf="addition">
             <h2>Addition</h2>
-            <a [routerLink]="['/products', product.id, 'addition']">{{addition_name}}</a>
+            <a [routerLink]="['/products', product.id, 'addition']">{{addition.name}}</a>
         </div>
     </div>
 </div>

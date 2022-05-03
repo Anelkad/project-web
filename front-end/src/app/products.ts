@@ -9,4 +9,13 @@ export interface Product {
   img3: string;
   like_count: number;
 }
+export interface AuthToken {
+  token:string;
+}
 
+export interface About {
+  id: number;
+  description: string;
+  contacts: string;
+  email: string;
+}
