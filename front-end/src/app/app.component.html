@@ -11,12 +11,26 @@
 
   <div class="right-nav">
     <a routerLink="/cart" title="shopping-cart"><img src="assets/images/shopping-cart.png " style="margin-top: 2px"></a>
-    <a routerLink="/register" title="login"><img src="assets/images/user.png"></a>
   </div>
 </nav>
-<div >
+<div  *ngIf="!logged" class="register">
+      <div class="avatar">
+        <img src="assets\images\avatar.png" alt="">
+      </div>
+      <div class="inputs">
+        <input type="text" placeholder="username" [(ngModel)] = "username">
+        <input placeholder="password" type="password" [(ngModel)] = "password">
+      </div>
+      <div class="buttons">
+        <button (click)="login()">log in</button>
+      </div>
+      <a href=""></a>
+    </div>
 
-</div>
-<router-outlet></router-outlet>
+  <div *ngIf="logged" class = "logout">
+    <button (click)="logout()">Logout</button>
+    <router-outlet></router-outlet>
+  </div>
 
-  
+
+

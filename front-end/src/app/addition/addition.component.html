@@ -19,11 +19,11 @@
                     <img src="assets\images\clock.png" alt="clock">
                     <p>30-60 minutes</p>
                 </div>
-            </div> 
+            </div>
 
             <div class="gallery">
                 <div class="main-photo">
-                    <img [src]="addition.image[image_num]">
+                    <img [src]="image[image_num]">
                 </div>
                 <div style="display: flex; margin-top: 10px; justify-content: center;">
                     <img class="nextImage" style="margin-right: 20px" (click)="left_move(image_num)" src="assets\images\left-arrow.png">
@@ -40,7 +40,6 @@
                 <h2>{{addition.name}}</h2>
                 <p style="margin: 20px 0 12px 4px">{{addition.price}} KZT</p>
                 <div style="margin-bottom: 20px; display: flex;">
-                    <button class="buy">buy</button>
                     <a (click)="share()" style="margin: 1px 35px 0 50px;">
                         <div style="display: flex;">
                             <img src="assets\images\share.png" style="width: 20px; align-self: flex-start;">
@@ -55,10 +54,10 @@
                         <p>{{addition.like_count}}</p>
                     </div>
                 </div>
-                
+
                 <p class="description-text">{{addition.description}}</p>
             </div> <!-- text and buttons -->
         </div>
-        
+
     </div>
 </div>

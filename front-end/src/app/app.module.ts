@@ -10,8 +10,9 @@ import { CategoriesComponent } from './categories/categories.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { AdditionComponent } from './addition/addition.component';
 import { CartComponent } from './cart/cart.component';
-import { RegisterComponent } from './register/register.component';
 import { FormsModule } from '@angular/forms';
+import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
+import { AuthInterceptor } from './AuthInterceptor';
 
 @NgModule({
   declarations: [
@@ -23,14 +24,20 @@ import { FormsModule } from '@angular/forms';
     ProductDetailComponent,
     AdditionComponent,
     CartComponent,
-    RegisterComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

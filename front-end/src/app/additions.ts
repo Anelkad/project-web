@@ -1,15 +1,17 @@
 export interface Addition {
-    id: number;
-    name: string;
-    product: number;
-    description: string;
-    price: number;
-    image: string[];
-    like_count: number;
+  id: number;
+  name: string;
+  product: number;
+  description: string;
+  price: number;
+  img1: string;
+  img2: string;
+  img3: string;
+  like_count: number;
 }
 
 export const additions = [
-    { 
+    {
         id: 1,
         name: "Ведьмак. Настольная ролевая игра: Дневник охотника на чудовищ (Книга)",
         product: 1,
@@ -20,7 +22,7 @@ export const additions = [
         "https://www.cardplace.ru/uploads/cardplace/f5deaeea/883e975926e09dbec91285485075b3b2.jpg"],
         like_count: 0,
     },
-    { 
+    {
         id: 2,
         name: "Pathfinder Маски Живого Бога",
         product: 2,
@@ -31,7 +33,7 @@ export const additions = [
         "https://hobbygames.cdnvideo.ru/image/cache/hobbygames_beta/data/HobbyWorld/Pathfinder/Pathfinder_Masks_Guts_3D-Book_Right-1024x1024-wm.jpg"],
         like_count: 0,
     },
-    
+
 {
     id: 3,
     name: "Вампиры. Маскарад: Охота на охотников",
@@ -160,5 +162,5 @@ export const additions = [
     image: ["https://hobbygames.cdnvideo.ru/image/cache/hobbygames_beta/data/HobbyWorld/Bang/Duel/Renegades/BANG_Duel_Renegades_00-1024x1024-wm.jpg","https://hobbygames.cdnvideo.ru/image/cache/hobbygames_beta/data/HobbyWorld/Bang/Duel/Renegades/HG/Bang_Duel_Renegati_02-1024x1024-wm.jpg","https://hobbygames.cdnvideo.ru/image/cache/hobbygames_beta/data/HobbyWorld/Bang/Duel/Renegades/HG/Bang_Duel_Renegati_03-1024x1024-wm.jpg"],
     like_count: 0
 }
-    
+
 ]

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { categories } from '../categories';
 import { Product } from '../products';
+import {Category} from "../categories";
 import { ProductsService } from '../products.service';
 @Component({
   selector: 'app-products',
@@ -9,7 +9,7 @@ import { ProductsService } from '../products.service';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
-  category_name!: string;
+  category!: Category;
   category_id!: number;
   products!: Product[];
 
@@ -23,8 +23,10 @@ export class ProductsComponent implements OnInit {
     const routeParams = this.route.snapshot.paramMap;
     this.category_id = +routeParams.get('categoryID')!;
     this.getProducts_byCategory(this.category_id);
-    this.category_name = this.getCategory_name(this.category_id);
-    // this.productService.getProducts_byCategory();
+    this.getCategory(this.category_id).subscribe((data)=>{
+      this.category= data;
+    });
+
   }
 
   Find() {
@@ -34,8 +36,8 @@ export class ProductsComponent implements OnInit {
     }
   }
 
-  getCategory_name(id: number) {
-    return this.productService.getCategory_name(id);
+  getCategory(id: number) {
+    return this.productService.getCategory(id);
   }
 
   put_homePressed(homePressed: boolean) {
@@ -43,13 +45,9 @@ export class ProductsComponent implements OnInit {
   }
 
   getProducts_byCategory(id: number) {
-    this.products = this.productService.getProducts_byCategory(id);
+    this.productService.getProducts_byCategory(id).subscribe((data)=>{
+      this.products = data;
+    })
   }
-
-  // getProducts_byCategory(id: number) {
-  //   this.productService.getProducts_byCategory(id).subscribe((products)=> {
-  //     this.products = products;
-  //   });
-  // }
 
 }

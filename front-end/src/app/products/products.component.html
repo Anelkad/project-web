@@ -3,18 +3,18 @@
     </div> -->
 
     <div class="products-header">
-        <p *ngIf="category_name">{{category_name}}</p>
+        <p *ngIf="category">{{category.title}}</p>
         <div class="find">
             <input type="text" [(ngModel)]="find">
             <button (click)="Find()">Find</button>
         </div>
     </div>
-    
-    <div class="products-main">  
+
+    <div class="products-main">
         <div *ngFor="let product of products">
-            <div><img [src]="product.image[0]" [routerLink]="['/categories', category_id, 'products', product.id]"></div>
+            <div><img [src]="product.img1" [routerLink]="['/categories', category_id, 'products', product.id]"></div>
             <p style="margin-top: 6px; font-weight: 500;">{{product.name}}</p>
             <p style="font-style:italic; margin-top: 4px;">{{product.price}} KZT</p>
-        </div>  
+        </div>
     </div>
 </div>
